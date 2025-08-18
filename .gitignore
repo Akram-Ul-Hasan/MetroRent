@@ -1,0 +1,59 @@
+# Xcode
+.DS_Store
+build/
+DerivedData/
+*.pbxuser
+!default.pbxuser
+*.mode1v3
+!default.mode1v3
+*.mode2v3
+!default.mode2v3
+*.perspectivev3
+!default.perspectivev3
+xcuserdata/
+*.xccheckout
+*.moved-aside
+*.xcuserstate
+
+# Swift Package Manager
+Packages/
+Package.pins
+Package.resolved
+.build/
+
+# CocoaPods
+Pods/
+*.xcworkspace
+
+# Carthage
+Carthage/Build/
+
+# Fastlane
+fastlane/report.xml
+fastlane/Preview.html
+fastlane/screenshots
+fastlane/test_output
+
+# Accio dependency management
+Dependencies/
+.accio/
+
+# Bundler
+.bundle/
+
+# Other
+*.swp
+*.lock
+*.tmp
+*.bak
+*.idea/
+*.hmap
+*.ipa
+*.dSYM.zip
+*.dSYM
+
+# Firebase / GoogleService files (if you don’t want them public)
+GoogleService-Info.plist
+
+# User-specific settings
+*.xcodeproj/project.xcworkspace/xcuserdata
