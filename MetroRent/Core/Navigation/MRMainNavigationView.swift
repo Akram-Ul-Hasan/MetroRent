@@ -19,6 +19,11 @@ struct MRMainNavigationView: View {
                             destinationView(for: route)
                         }
                 }
+                .tabItem {
+                    Image(systemName: coordinator.selectedTab == tab ? tab.selectedIcon : tab.icon)
+                    Text(tab.title)
+                }
+                .tag(tab)
             }
         }
     }
@@ -27,7 +32,7 @@ struct MRMainNavigationView: View {
     private func tabContent(for tab: MRTabItem) -> some View {
         switch tab {
         case .home:
-            EmptyView()
+            MRHomeScreen()
         case .search:
             EmptyView()
         case .communication:

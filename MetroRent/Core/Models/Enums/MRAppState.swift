@@ -8,7 +8,7 @@
 import Foundation
 
 enum MRAppState {
-    case splash
+//    case splash
     case home
     
 }

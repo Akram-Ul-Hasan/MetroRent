@@ -8,7 +8,7 @@
 import SwiftUI
 
 class MRNavigationCoordinator: ObservableObject {
-    @Published var appState: MRAppState = .splash
+    @Published var appState: MRAppState = .home
     @Published var selectedTab: MRTabItem? = .home
     @Published var navigationStack: [MRNavigationRoute] = []
     

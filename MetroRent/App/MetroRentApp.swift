@@ -9,9 +9,12 @@ import SwiftUI
 
 @main
 struct MetroRentApp: App {
+    @StateObject private var coordinator = MRNavigationCoordinator()
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            MRRootNavigationView()
+                .environmentObject(coordinator)
         }
     }
 }
