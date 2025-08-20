@@ -19,7 +19,7 @@ struct MRHomeScreen: View {
                 .ignoresSafeArea(edges: .all)
             
             ScrollView {
-                MRSearchFieldView(searchText: $viewModel.searchText) {
+                MRSearchFieldView(searchText: $viewModel.searchText, placeholder: "Seach Property") {
                     
                 }
                 

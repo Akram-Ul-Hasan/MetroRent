@@ -6,9 +6,15 @@
 //
 
 import SwiftUI
+import Firebase
 
 @main
 struct MetroRentApp: App {
+    
+    init() {
+        FirebaseApp.configure()
+    }
+    
     @StateObject private var coordinator = MRNavigationCoordinator()
     
     var body: some Scene {

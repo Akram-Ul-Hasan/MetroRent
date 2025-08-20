@@ -9,6 +9,7 @@ import SwiftUI
 
 struct MRSearchFieldView: View {
     @Binding var searchText: String
+    let placeholder: String
     
     var onSearch: () -> Void
     
@@ -52,7 +53,7 @@ struct MRSearchFieldView: View {
 }
 
 #Preview {
-    MRSearchFieldView(searchText: .constant("Hello")) {
+    MRSearchFieldView(searchText: .constant("Hello"), placeholder: "Search") {
         print("Search tapped!")
     }
 }
