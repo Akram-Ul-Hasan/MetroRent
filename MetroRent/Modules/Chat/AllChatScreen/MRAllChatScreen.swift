@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct MRAllMessageScreen: View {
+struct MRAllChatScreen: View {
     var body: some View {
         VStack(alignment: .leading) {
             MRAllMessageHeaderView()
@@ -19,10 +19,15 @@ struct MRAllMessageScreen: View {
 //            }
 //            .listStyle(PlainListStyle())
             Spacer()
+                
         }
+        .navigationTitle("Chats")
+        .navigationBarTitleDisplayMode(.large)
     }
 }
 
 #Preview {
-    MRAllMessageScreen()
+    NavigationStack {
+        MRAllChatScreen()
+    }
 }
