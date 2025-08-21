@@ -9,6 +9,5 @@ import Foundation
 
 enum MRAppState {
 //    case splash
-    case home
-    
+    case rootTab
 }

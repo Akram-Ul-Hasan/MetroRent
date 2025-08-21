@@ -10,7 +10,7 @@ import Foundation
 enum MRTabItem: String, CaseIterable {
     case home
     case search
-    case communication
+    case chat
     case notification
     case profile
     
@@ -20,8 +20,8 @@ enum MRTabItem: String, CaseIterable {
             return "Home"
         case .search:
             return "Search"
-        case .communication:
-            return "Communication"
+        case .chat:
+            return "Chat"
         case .notification:
             return "Notification"
         case .profile:
@@ -34,8 +34,8 @@ enum MRTabItem: String, CaseIterable {
             return "house"
         case .search:
             return "magnifyingglass"
-        case .communication:
-            return "envelope"
+        case .chat:
+            return "message"
         case .notification:
             return "bell"
         case .profile:
@@ -49,8 +49,8 @@ enum MRTabItem: String, CaseIterable {
             return "house.fill"
         case .search:
             return "magnifyingglass"
-        case .communication:
-            return "envelope.fill"
+        case .chat:
+            return "message.fill"
         case .notification:
             return "bell.fill"
         case .profile:

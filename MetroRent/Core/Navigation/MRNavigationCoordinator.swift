@@ -8,8 +8,10 @@
 import SwiftUI
 
 class MRNavigationCoordinator: ObservableObject {
-    @Published var appState: MRAppState = .home
+    @Published var appState: MRAppState = .rootTab
     @Published var selectedTab: MRTabItem? = .home
-    @Published var navigationStack: [MRNavigationRoute] = []
     
+    @Published var homeCoordinator = MRHomeCoordinator()
+    @Published var chatCoordinator = MRChatCoordinator()
+    @Published var profileCoordinator = MRProfileCoordinator()
 }

@@ -15,8 +15,8 @@ struct MRRootNavigationView: View {
             switch coordinator.appState {
 //            case .splash:
 //                EmptyView()
-            case .home:
-                MRMainNavigationView()
+            case .rootTab:
+                MRRootTabView(coordinator: coordinator)
             }
                 
         }
