@@ -1,17 +1,17 @@
 //
-//  MRLoginScreen.swift
+//  MRSignUpScreen.swift
 //  MetroRent
 //
-//  Created by Techetron Ventures Ltd on 8/22/25.
+//  Created by Techetron Ventures Ltd on 8/23/25.
 //
 
 import SwiftUI
 
-struct MRLoginScreen: View {
-    @StateObject var viewModel = MRLoginViewModel()
+struct MRSignUpScreen: View {
+    @StateObject var viewModel = MRSignUpViewModel()
     
     var body: some View {
-        VStack(alignment: .leading, spacing: 20) {
+        VStack(spacing: 20) {
             HStack {
                 Image(systemName: "house.fill")
                     .resizable()
@@ -22,54 +22,25 @@ struct MRLoginScreen: View {
                 Text("MetroRent")
                     .font(.title2)
                     .fontWeight(.bold)
+                
+                Spacer()
             }
             .padding(.horizontal)
             
             Spacer()
             
-            Text("Welcome Back!")
+            Text("Sign Up")
                 .font(.title)
                 .fontWeight(.bold)
-                .padding(.horizontal)
+                .padding(.bottom, 30)
             
-            Text("Sign in to your account")
-                .font(.title2)
-                .fontWeight(.semibold)
-                .foregroundStyle(.secondary)
-                .padding(.horizontal)
-            
+            MRAuthTextField(text: $viewModel.fullName, placeholder: "Full Name")
             MRAuthTextField(text: $viewModel.email, placeholder: "Email Address")
-            
             MRAuthTextField(text: $viewModel.password, placeholder: "Password", isSecure: true)
             
-            HStack {
-                Button {
-                    viewModel.isRememberMe.toggle()
-                } label: {
-                    HStack(spacing: 0) {
-                        Image(systemName: viewModel.isRememberMe ? "checkmark.square.fill" : "square")
-                            .imageScale(.medium)
-                        Text("Remember Me")
-                            .font(.footnote)
-                    }
-                }
-                .buttonStyle(.plain)
-                .padding(.leading, 20)
-                .accessibilityLabel(" Me")
-                
-                Spacer()
-                Button("Forgot Password?") {
-                    
-                }
-                .font(.footnote)
-                .foregroundStyle(.blackLevel1)
-                .padding(.trailing, 20)
-            }
-            
-            MRPrimaryButton(title: "Login") {
+            MRPrimaryButton(title: "Sign Up") {
                 
             }
-            
             HStack {
                 Rectangle()
                     .frame(height: 1)
@@ -96,25 +67,24 @@ struct MRLoginScreen: View {
                 .cornerRadius(12)
             }
             .padding(.horizontal)
-            
+                        
             Spacer()
             
-            HStack(alignment: .center) {
-                Text("Don't have an account?")
-                    .foregroundStyle(.secondary)
-                Button("Sign Up") {
+            HStack {
+                Text("Already have an account?")
+                
+                Button("Login") {
                     
                 }
                 .fontWeight(.semibold)
-                .foregroundStyle(.blackLevel1)
+                .foregroundColor(.blackLevel1)
             }
             .font(.footnote)
             .padding(.bottom, 10)
-            .frame(maxWidth: .infinity)
         }
     }
 }
 
 #Preview {
-    MRLoginScreen()
+    MRSignUpScreen()
 }
