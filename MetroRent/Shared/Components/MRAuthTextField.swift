@@ -21,12 +21,18 @@ struct MRAuthTextField: View {
                 Group {
                     if isPasswordVisible {
                         TextField(placeholder, text: $text)
+                            .autocorrectionDisabled(true)
+                            .textInputAutocapitalization(.never)
                     } else {
                         SecureField(placeholder, text: $text)
+                            .autocorrectionDisabled(true)
+                            .textInputAutocapitalization(.never)
                     }
                 }
             } else {
                 TextField(placeholder, text: $text)
+                    .autocorrectionDisabled(true)
+                    .textInputAutocapitalization(.never)
             }
             
             if isSecure {

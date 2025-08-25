@@ -6,20 +6,22 @@
 //
 
 import SwiftUI
+import GoogleSignInSwift
 
 struct MRSignUpScreen: View {
     @StateObject var viewModel = MRSignUpViewModel()
+    @EnvironmentObject private var coordinator: MRAuthenticationCoordinator
     
     var body: some View {
         VStack(spacing: 20) {
             HStack {
-                Image(systemName: "house.fill")
+                Image(systemName: MRStrings.app.logo)
                     .resizable()
                     .scaledToFit()
                     .frame(width: 32, height: 32)
                     .foregroundColor(.primary)
     
-                Text("MetroRent")
+                Text(MRStrings.app.appName)
                     .font(.title2)
                     .fontWeight(.bold)
                 
@@ -29,18 +31,38 @@ struct MRSignUpScreen: View {
             
             Spacer()
             
-            Text("Sign Up")
+            Text(MRStrings.auth.signup.title)
                 .font(.title)
                 .fontWeight(.bold)
                 .padding(.bottom, 30)
             
-            MRAuthTextField(text: $viewModel.fullName, placeholder: "Full Name")
-            MRAuthTextField(text: $viewModel.email, placeholder: "Email Address")
-            MRAuthTextField(text: $viewModel.password, placeholder: "Password", isSecure: true)
+            MRAuthTextField(text: $viewModel.fullName, placeholder: MRStrings.auth.signup.fullNamePlaceholder)
+            MRAuthTextField(text: $viewModel.email, placeholder: MRStrings.auth.signup.emailPlaceholder)
+            MRAuthTextField(text: $viewModel.password, placeholder: MRStrings.auth.signup.passwordPlaceholder, isSecure: true)
+            MRAuthTextField(text: $viewModel.confirmPassword, placeholder: MRStrings.auth.signup.confirmPasswordPlaceholder, isSecure: true)
             
-            MRPrimaryButton(title: "Sign Up") {
-                
+            MRPrimaryButton(title: MRStrings.auth.signup.createAccountButton) {
+                Task {
+                    print("createAccountpressed")
+                    await viewModel.createAccount()
+                }
             }
+            .alert("Success", isPresented: $viewModel.isUserCreated) {
+                Button("OK") {
+                    coordinator.pop()
+                }
+            } message: {
+                Text("Your account has been created successfully.")
+            }
+            
+            if let error = viewModel.errorMessage {
+                Text(error)
+                    .foregroundColor(.red)
+                    .font(.footnote)
+                    .multilineTextAlignment(.center)
+                    .padding(.horizontal)
+            }
+            
             HStack {
                 Rectangle()
                     .frame(height: 1)
@@ -53,28 +75,20 @@ struct MRSignUpScreen: View {
             }
             .padding(.horizontal)
             
-            Button {
-                
-            } label: {
-                HStack {
-                    Image(systemName: "globe")
-                    Text("Login with Google")
+            GoogleSignInButton(viewModel: GoogleSignInButtonViewModel(scheme: .dark, style: .icon, state: .normal)) {
+                Task {
+                    await viewModel.signinWithGoogle()
                 }
-                .frame(maxWidth: .infinity)
-                .padding()
-                .foregroundStyle(.blackLevel1)
-                .background(Color(.systemGray6))
-                .cornerRadius(12)
             }
-            .padding(.horizontal)
+            .frame(maxWidth: .infinity, alignment: .center)
                         
             Spacer()
             
             HStack {
-                Text("Already have an account?")
+                Text(MRStrings.auth.signup.alreadyHaveAccount)
                 
-                Button("Login") {
-                    
+                Button(MRStrings.auth.signup.loginButtonTitle) {
+                    coordinator.pop()
                 }
                 .fontWeight(.semibold)
                 .foregroundColor(.blackLevel1)

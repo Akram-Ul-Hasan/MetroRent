@@ -6,20 +6,24 @@
 //
 
 import SwiftUI
+import GoogleSignIn
+import GoogleSignInSwift
 
 struct MRLoginScreen: View {
-    @StateObject var viewModel = MRLoginViewModel()
+    @EnvironmentObject var coordinator: MRAuthenticationCoordinator
     
+    @StateObject var viewModel = MRLoginViewModel()
+
     var body: some View {
         VStack(alignment: .leading, spacing: 20) {
             HStack {
-                Image(systemName: "house.fill")
+                Image(systemName: MRStrings.app.logo)
                     .resizable()
                     .scaledToFit()
                     .frame(width: 32, height: 32)
                     .foregroundColor(.primary)
     
-                Text("MetroRent")
+                Text(MRStrings.app.appName)
                     .font(.title2)
                     .fontWeight(.bold)
             }
@@ -27,20 +31,20 @@ struct MRLoginScreen: View {
             
             Spacer()
             
-            Text("Welcome Back!")
+            Text(MRStrings.auth.login.title)
                 .font(.title)
                 .fontWeight(.bold)
                 .padding(.horizontal)
             
-            Text("Sign in to your account")
+            Text(MRStrings.auth.login.subtitle)
                 .font(.title2)
                 .fontWeight(.semibold)
                 .foregroundStyle(.secondary)
                 .padding(.horizontal)
             
-            MRAuthTextField(text: $viewModel.email, placeholder: "Email Address")
+            MRAuthTextField(text: $viewModel.email, placeholder: MRStrings.auth.login.emailPlaceholder)
             
-            MRAuthTextField(text: $viewModel.password, placeholder: "Password", isSecure: true)
+            MRAuthTextField(text: $viewModel.password, placeholder: MRStrings.auth.login.passwordPlaceholder , isSecure: true)
             
             HStack {
                 Button {
@@ -49,7 +53,7 @@ struct MRLoginScreen: View {
                     HStack(spacing: 0) {
                         Image(systemName: viewModel.isRememberMe ? "checkmark.square.fill" : "square")
                             .imageScale(.medium)
-                        Text("Remember Me")
+                        Text(MRStrings.auth.login.rememberMe)
                             .font(.footnote)
                     }
                 }
@@ -58,16 +62,26 @@ struct MRLoginScreen: View {
                 .accessibilityLabel(" Me")
                 
                 Spacer()
-                Button("Forgot Password?") {
-                    
+                Button(MRStrings.auth.login.forgotPassword) {
+                    coordinator.push(.forgotPassword)
                 }
                 .font(.footnote)
                 .foregroundStyle(.blackLevel1)
                 .padding(.trailing, 20)
             }
             
-            MRPrimaryButton(title: "Login") {
-                
+            MRPrimaryButton(title: MRStrings.auth.login.loginButton) {
+                Task {
+                    await viewModel.login()
+                }
+            }
+            
+            if let error = viewModel.errorMessage {
+                Text(error)
+                    .foregroundColor(.red)
+                    .font(.footnote)
+                    .multilineTextAlignment(.center)
+                    .padding(.horizontal)
             }
             
             HStack {
@@ -82,28 +96,21 @@ struct MRLoginScreen: View {
             }
             .padding(.horizontal)
             
-            Button {
-                
-            } label: {
-                HStack {
-                    Image(systemName: "globe")
-                    Text("Login with Google")
+            
+            GoogleSignInButton(viewModel: GoogleSignInButtonViewModel(scheme: .dark, style: .icon, state: .normal)) {
+                Task {
+                    await viewModel.signinWithGoogle()
                 }
-                .frame(maxWidth: .infinity)
-                .padding()
-                .foregroundStyle(.blackLevel1)
-                .background(Color(.systemGray6))
-                .cornerRadius(12)
             }
-            .padding(.horizontal)
+            .frame(maxWidth: .infinity, alignment: .center)
             
             Spacer()
             
             HStack(alignment: .center) {
-                Text("Don't have an account?")
+                Text(MRStrings.auth.login.dontHaveAccountText)
                     .foregroundStyle(.secondary)
-                Button("Sign Up") {
-                    
+                Button(MRStrings.auth.login.signUpButton) {
+                    coordinator.push(.signup)
                 }
                 .fontWeight(.semibold)
                 .foregroundStyle(.blackLevel1)

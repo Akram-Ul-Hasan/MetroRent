@@ -9,6 +9,7 @@ import SwiftUI
 
 struct MRResetPasswordScreen: View {
     @StateObject private var viewModel = MRResetPasswordViewModel()
+    @EnvironmentObject private var coordinator: MRAuthenticationCoordinator
     
     var body: some View {
         VStack(alignment: .leading, spacing: 20) {
@@ -44,12 +45,21 @@ struct MRResetPasswordScreen: View {
                 
                 
                 MRPrimaryButton(title: MRStrings.auth.resetPassword.buttonTitle) {
-                    
+                    Task {
+                        await viewModel.sendResetLink()
+                    }
                 }
                 
+                if let error = viewModel.errorMessage {
+                    Text(error)
+                        .foregroundColor(.red)
+                        .font(.footnote)
+                        .multilineTextAlignment(.center)
+                        .padding(.horizontal)
+                }
                 
                 Button {
-                    
+                    coordinator.pop()
                 } label: {
                     Text(MRStrings.auth.resetPassword.returnToLogin)
                         .foregroundStyle(.blackLevel1)

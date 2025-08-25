@@ -13,7 +13,7 @@ struct MRPrimaryButton: View {
     
     var body: some View {
         Button {
-            
+            action()
         } label: {
             Text(title)
                 .fontWeight(.semibold)
