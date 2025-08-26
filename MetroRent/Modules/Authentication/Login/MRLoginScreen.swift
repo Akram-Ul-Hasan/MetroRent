@@ -10,7 +10,7 @@ import GoogleSignIn
 import GoogleSignInSwift
 
 struct MRLoginScreen: View {
-    @EnvironmentObject var coordinator: MRAuthenticationCoordinator
+    @EnvironmentObject var coordinator: MRAuthCoordinator
     
     @StateObject var viewModel = MRLoginViewModel()
 

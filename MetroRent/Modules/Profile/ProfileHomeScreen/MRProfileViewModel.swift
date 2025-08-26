@@ -7,8 +7,10 @@
 
 import Foundation
 
-class MRProfileViewModel: ObservableObject {
+@MainActor
+final class MRProfileViewModel: ObservableObject {
     @Published var showLogoutAlert: Bool = false
+    private var session = MRSessionManager.shared
     
     var General: [MRProfileMenuModel] = [
         .init(title: "Previous Rant", systemImageName: "text.bubble.fill", route: .previousRants),
@@ -33,8 +35,9 @@ class MRProfileViewModel: ObservableObject {
         }
     }
     
-    func confirmLogout() {
+    func confirmLogout() async {
         showLogoutAlert = false
-        print("Logged out successfully")
+        
+        await self.session.logout()
     }
 }

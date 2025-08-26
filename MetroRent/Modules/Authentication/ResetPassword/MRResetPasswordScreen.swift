@@ -9,7 +9,7 @@ import SwiftUI
 
 struct MRResetPasswordScreen: View {
     @StateObject private var viewModel = MRResetPasswordViewModel()
-    @EnvironmentObject private var coordinator: MRAuthenticationCoordinator
+    @EnvironmentObject private var coordinator: MRAuthCoordinator
     
     var body: some View {
         VStack(alignment: .leading, spacing: 20) {

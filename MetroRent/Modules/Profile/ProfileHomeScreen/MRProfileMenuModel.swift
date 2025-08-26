@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct MRProfileMenuModel {
+struct MRProfileMenuModel: Identifiable {
     let id = UUID()
     let title: String
     let systemImageName: String
