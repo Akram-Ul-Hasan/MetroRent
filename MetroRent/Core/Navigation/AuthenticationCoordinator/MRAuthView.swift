@@ -7,8 +7,8 @@
 
 import SwiftUI
 
-struct MRAuthenticationCoordinatorView: View {
-    @StateObject var coordinator = MRAuthenticationCoordinator()
+struct MRAuthView: View {
+    @ObservedObject var coordinator: MRAuthCoordinator
     
     var body: some View {
         NavigationStack(path: $coordinator.path) {

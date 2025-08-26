@@ -7,7 +7,9 @@
 
 import Foundation
 
-enum MRAppState {
+enum MRAppFlow {
 //    case splash
-    case rootTab
+    case onboarding
+    case authentication
+    case main
 }

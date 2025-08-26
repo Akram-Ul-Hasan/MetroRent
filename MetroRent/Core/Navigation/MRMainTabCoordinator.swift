@@ -7,8 +7,7 @@
 
 import SwiftUI
 
-class MRNavigationCoordinator: ObservableObject {
-    @Published var appState: MRAppState = .rootTab
+class MRMainTabCoordinator: ObservableObject {
     @Published var selectedTab: MRTabItem? = .home
     
     @Published var homeCoordinator = MRHomeCoordinator()

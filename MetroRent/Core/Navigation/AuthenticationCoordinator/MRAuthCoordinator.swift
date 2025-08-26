@@ -7,7 +7,7 @@
 
 import Foundation
 
-class MRAuthenticationCoordinator: ObservableObject {
+class MRAuthCoordinator: ObservableObject {
     @Published var path: [MRAuthRouteType] = []
     
     func push(_ route: MRAuthRouteType) {

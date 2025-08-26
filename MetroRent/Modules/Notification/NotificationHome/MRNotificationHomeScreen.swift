@@ -13,7 +13,7 @@ struct MRNotificationHomeScreen: View {
             VStack {
                 
             }
-            .navigationTitle(MRStringConstants.notification.title)
+            .navigationTitle(MRStrings.notification.title)
             .navigationBarTitleDisplayMode(.inline)
         }
     }

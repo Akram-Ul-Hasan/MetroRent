@@ -15,12 +15,12 @@ struct MetroRentApp: App {
         FirebaseApp.configure()
     }
     
-    @StateObject private var coordinator = MRNavigationCoordinator()
+    @StateObject private var session = MRSessionManager.shared
     
     var body: some Scene {
         WindowGroup {
-            MRRootNavigationView()
-                .environmentObject(coordinator)
+            MRAppFlowController()
+                .environmentObject(session)
         }
     }
 }

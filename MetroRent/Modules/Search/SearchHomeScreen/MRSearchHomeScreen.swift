@@ -14,7 +14,7 @@ struct MRSearchHomeScreen: View {
                 Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
             }
         }
-        .navigationTitle(MRStringConstants.search.title)
+        .navigationTitle(MRStrings.search.title)
         .navigationBarTitleDisplayMode(.inline)
     }
 }

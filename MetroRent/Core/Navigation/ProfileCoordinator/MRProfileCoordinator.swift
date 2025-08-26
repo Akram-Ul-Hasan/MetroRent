@@ -8,5 +8,5 @@
 import Foundation
 
 class MRProfileCoordinator: ObservableObject {
-    @Published var router = MRRouter(root: MRProfileRouteType.profile)
+    @Published var router = MRRouter<MRProfileRouteType>()
 }

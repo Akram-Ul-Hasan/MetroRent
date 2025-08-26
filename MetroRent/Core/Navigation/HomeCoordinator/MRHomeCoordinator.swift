@@ -8,5 +8,5 @@
 import Foundation
 
 class MRHomeCoordinator: ObservableObject {
-    @Published var router = MRRouter(root: MRHomeRouteType.home)
+    @Published var router = MRRouter<MRHomeRouteType>()
 }

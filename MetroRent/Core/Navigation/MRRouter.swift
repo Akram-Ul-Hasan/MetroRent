@@ -8,23 +8,19 @@
 import Foundation
 
 final class MRRouter<Route: Hashable>: ObservableObject {
-    @Published var path: [Route]
-
-    init(root: Route) {
-        self.path = []
-    }
+    @Published var path: [Route] = []
 
     func push(_ route: Route) {
         path.append(route)
     }
 
     func pop() {
-        if path.count > 1 {
+        if !path.isEmpty {
             path.removeLast()
         }
     }
 
     func reset() {
-        path = [path.first].compactMap { $0 }
+        path.removeAll()
     }
 }

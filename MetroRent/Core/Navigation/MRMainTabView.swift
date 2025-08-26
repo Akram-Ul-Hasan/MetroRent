@@ -7,8 +7,8 @@
 
 import SwiftUI
 
-struct MRRootTabView: View {
-    @ObservedObject var coordinator: MRNavigationCoordinator
+struct MRMainTabView: View {
+    @ObservedObject var coordinator: MRMainTabCoordinator
     
     var body: some View {
         TabView(selection: $coordinator.selectedTab) {
@@ -29,9 +29,6 @@ struct MRRootTabView: View {
                     Label(MRTabItem.profile.title, systemImage: MRTabItem.profile.icon)
                 }
                 .tag(MRTabItem.profile)
-            
-            
-                
         }
     }
 }

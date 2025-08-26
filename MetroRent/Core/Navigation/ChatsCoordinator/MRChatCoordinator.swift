@@ -8,5 +8,5 @@
 import Foundation
 
 class MRChatCoordinator: ObservableObject {
-    @Published var router = MRRouter(root: MRChatRouteType.chats)
+    @Published var router = MRRouter<MRChatRouteType>()
 }

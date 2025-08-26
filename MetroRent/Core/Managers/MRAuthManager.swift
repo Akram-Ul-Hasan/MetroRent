@@ -11,7 +11,7 @@ import FirebaseAuth
 import GoogleSignIn
 import FirebaseCore
 
-final class MRAuthManager {
+final class MRAuthManager: MRAuthProtocol {
     static let shared = MRAuthManager()
     
     private let defaults = UserDefaults.standard
