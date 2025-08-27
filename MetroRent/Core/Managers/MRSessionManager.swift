@@ -8,6 +8,7 @@
 import Foundation
 import FirebaseAuth
 
+@MainActor
 final class MRSessionManager: ObservableObject {
     static let shared = MRSessionManager()
     private init() {
@@ -36,7 +37,7 @@ final class MRSessionManager: ObservableObject {
     func logout() async {
         do {
             try Auth.auth().signOut()
-            currentUser = nil
+            self.currentUser = nil
         } catch {
             print("Error signing out: \(error)")
         }

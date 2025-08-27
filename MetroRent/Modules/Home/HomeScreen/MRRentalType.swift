@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum MRPropertyType: String, CaseIterable {
+enum MRRentalType: String, CaseIterable {
     case all
     case apartment
     case singleRoom

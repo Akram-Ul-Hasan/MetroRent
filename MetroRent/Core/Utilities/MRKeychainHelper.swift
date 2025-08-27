@@ -26,7 +26,7 @@ final class MRKeychainHelper {
     }
     
     func read(_ key: String) -> String? {
-        var query: [String: Any] = [
+        let query: [String: Any] = [
             kSecClass as String: kSecClassGenericPassword,
             kSecAttrAccount as String: key,
             kSecMatchLimit as String: kSecMatchLimitOne,
@@ -43,7 +43,7 @@ final class MRKeychainHelper {
     }
     
     func delete(_ key: String) {
-        var query: [String: Any] = [
+        let query: [String: Any] = [
             kSecClass as String: kSecClassGenericPassword,
             kSecAttrAccount as String: key
         ]

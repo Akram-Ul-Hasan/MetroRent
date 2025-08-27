@@ -71,7 +71,7 @@ final class MRSignUpViewModel: ObservableObject {
     func signinWithGoogle() async {
         do {
             let user = try await MRAuthManager.shared.signInWithGoogle()
-            print("User signed in successfully")
+            print("User signed in successfully:\(user)")
         } catch {
             print("Google Sign In Failed: \(error.localizedDescription)")
         }
