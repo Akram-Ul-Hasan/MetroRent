@@ -9,7 +9,7 @@
 import FirebaseAuth
 import Foundation
 
-protocol MRAuthProtocol {
+protocol MRAuthServiceProtocol {
     func createUser(email: String, password: String) async throws -> AuthDataResultModel
     func loginUser(email: String, password: String) async throws -> User
     func logoutUser() throws

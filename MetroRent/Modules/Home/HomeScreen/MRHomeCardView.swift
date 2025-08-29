@@ -15,7 +15,7 @@ struct MRHomeCardView: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
             ZStack(alignment: .topTrailing) {
-                Image(rental.imageName.first ?? "")
+                Image(rental.media.imageURLs.first ?? "")
                     .resizable()
                     .scaledToFill()
                     .frame(height: 140)
@@ -33,16 +33,16 @@ struct MRHomeCardView: View {
 //            .padding(0)
             
             VStack(alignment: .leading) {
-                Text(rental.title)
+                Text(rental.basic.title)
                     .font(.headline)
                     .foregroundStyle(.primary)
                                 
-                Text(rental.propertyType.displayName)
+                Text(rental.basic.propertyType.displayName)
                     .font(.caption)
                     .foregroundStyle(.secondary)
                     .padding(.vertical, 2)
                 
-                Text(rental.location)
+                Text(rental.basic.location)
                     .font(.caption)
                     .foregroundStyle(.secondary)
                     .padding(.top, 4)
@@ -50,13 +50,13 @@ struct MRHomeCardView: View {
             }
             
             HStack {
-                Label("\(rental.capacity ?? 0) person", systemImage: "person.2.fill")
+                Label("\(rental.basic.capacity ?? 0) person", systemImage: "person.2.fill")
                     .font(.caption)
                     .foregroundStyle(.secondary)
                 
                 Spacer()
                 
-                Text("\(rental.pricePerMonth)/Month")
+                Text("\(rental.pricing.pricePerMonth)/Month")
                     .font(.headline)
                     .fontWeight(.regular)
                     .foregroundStyle(.primary)
@@ -70,5 +70,5 @@ struct MRHomeCardView: View {
 }
 
 #Preview {
-    MRHomeCardView(rental: .init(title: "Sweet vila", propertyType: .apartment, rating: 4.5, location: "cha-16/1, Gupipara, badda, Gulshan", capacity: 6, pricePerMonth: 18000, imageName: ["onboardingImage1", "onboardingImage2"], isFavorite: false), onTap: {}, onFavoriteTap: {})
+    MRHomeCardView(rental: MRMockData.sampleRentalData, onTap: {}, onFavoriteTap: {})
 }

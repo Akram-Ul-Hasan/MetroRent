@@ -11,8 +11,8 @@ import FirebaseAuth
 import GoogleSignIn
 import FirebaseCore
 
-final class MRAuthManager: MRAuthProtocol {
-    static let shared = MRAuthManager()
+final class MRAuthService: MRAuthServiceProtocol {
+    static let shared = MRAuthService()
     
     private let defaults = UserDefaults.standard
     private let rememberMeKey = "rememberMe"

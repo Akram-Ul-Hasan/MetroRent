@@ -17,6 +17,13 @@ enum MRStrings {
         static let title = "Home"
     }
     
+    enum rentalDetails {
+        static let title = "Rental Details"
+        static let features = "Features"
+        static let review = "Review"
+        static let applyNowButton = "Apply Now"
+    }
+    
     enum search {
         static let title = "Search"
     }

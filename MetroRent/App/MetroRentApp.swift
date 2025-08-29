@@ -16,11 +16,13 @@ struct MetroRentApp: App {
     }
     
     @StateObject private var session = MRSessionManager.shared
+    @StateObject private var notificationManager = MRNotificationManager.shared
     
     var body: some Scene {
         WindowGroup {
             MRAppFlowController()
                 .environmentObject(session)
+                .environmentObject(notificationManager)
         }
     }
 }

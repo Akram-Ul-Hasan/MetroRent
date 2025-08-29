@@ -15,7 +15,10 @@ final class MRLoginViewModel: ObservableObject {
     @Published var isLoading = false
     @Published var errorMessage: String?
     
-    init() {
+    private var auth: MRAuthServiceProtocol
+    
+    init(authService: MRAuthServiceProtocol = MRAuthService.shared) {
+        self.auth = authService
         loadRememberedCredentials()
     }
     
@@ -30,12 +33,12 @@ final class MRLoginViewModel: ObservableObject {
         defer { isLoading = false }
 
         do {
-            let _ = try await MRAuthManager.shared.loginUser(email: email, password: password)
+            let _ = try await auth.loginUser(email: email, password: password)
             
             if isRememberMe {
-                MRAuthManager.shared.setRememberMe(true, email: email, password: password)
+                auth.setRememberMe(true, email: email, password: password)
             } else {
-                MRAuthManager.shared.setRememberMe(false, email: nil, password: nil)
+                auth.setRememberMe(false, email: nil, password: nil)
             }
             print("User Logged In Successfully")
             
@@ -47,7 +50,7 @@ final class MRLoginViewModel: ObservableObject {
     
     func signinWithGoogle() async {
         do {
-            _ = try await MRAuthManager.shared.signInWithGoogle()
+            _ = try await auth.signInWithGoogle()
             print("User signed in successfully")
         } catch {
             print("Google Sign In Failed: \(error.localizedDescription)")
@@ -55,9 +58,9 @@ final class MRLoginViewModel: ObservableObject {
     }
     
     func loadRememberedCredentials() {
-        if MRAuthManager.shared.isRememberMeEnabled() {
-            email = MRAuthManager.shared.getRememberedEmail() ?? ""
-            password = MRAuthManager.shared.getRememberedPassword() ?? ""
+        if auth.isRememberMeEnabled() {
+            email = auth.getRememberedEmail() ?? ""
+            password = auth.getRememberedPassword() ?? ""
             isRememberMe = true
         }
     }

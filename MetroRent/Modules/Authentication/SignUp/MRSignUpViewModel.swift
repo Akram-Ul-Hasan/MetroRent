@@ -17,6 +17,12 @@ final class MRSignUpViewModel: ObservableObject {
     @Published var errorMessage: String?
     @Published var isUserCreated: Bool = false
     
+    private let authService: MRAuthServiceProtocol
+    
+    init(authService: MRAuthServiceProtocol = MRAuthService.shared) {
+        self.authService = authService
+    }
+    
     var isFormValid: Bool {
         !fullName.isEmpty &&
         isValidEmail(email) &&
@@ -48,7 +54,7 @@ final class MRSignUpViewModel: ObservableObject {
         errorMessage = nil
         
         do {
-            let userDate = try await MRAuthManager.shared.createUser(email: email, password: password)
+            let userDate = try await authService.createUser(email: email, password: password)
             self.isUserCreated = true
             print("User Created Successfully: \(userDate)")
         } catch {
@@ -70,7 +76,7 @@ final class MRSignUpViewModel: ObservableObject {
     
     func signinWithGoogle() async {
         do {
-            let user = try await MRAuthManager.shared.signInWithGoogle()
+            let user = try await authService.signInWithGoogle()
             print("User signed in successfully:\(user)")
         } catch {
             print("Google Sign In Failed: \(error.localizedDescription)")
